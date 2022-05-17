@@ -15,6 +15,7 @@ public class Main {
     int turtleCount = 0;
     System.out.println("I own " + turtleCount + " " + pluralize("turtle", turtleCount) + ".");
 
+    flipNHeads(3);
   }
 
   // function accepts an int and "flips coins" until n heads are flipped in a row
