@@ -47,12 +47,16 @@ public class Main {
   // function accepts a string and an int and returns the string concatenated
   // with an "s" if the int is 0 or more than 1, otherwise returns word as-is
   public static String pluralize(String word, int numTimes) {
-    if (numTimes == 1) {
-      return word;
-    }
+    // string result = "";
+
+    // if (numTimes == 1) {
+    //   return word;
+    // }
     if (numTimes == 0 || numTimes > 1) {
       return (word + "s");
     }
+
+    return word;
   }
 
 }
