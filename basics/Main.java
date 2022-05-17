@@ -30,9 +30,11 @@ public class Main {
     boolean display = true;
     int priorSecond = now.getSecond();
     int second = priorSecond;
+    float hertz = 0f;
 
     while (true) {
       while (priorSecond == second) {
+        hertz++;
         now = LocalDateTime.now();
         second = now.getSecond();
       }
@@ -43,7 +45,9 @@ public class Main {
       int minute = now.getMinute();
       
       String timeNow = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-      System.out.println(timeNow);
+      float MHz = hertz / 1_000_000f;
+      System.out.println(timeNow + " " + MHz + " MHz");
+      hertz = 0;
     }
   }
 
