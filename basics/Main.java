@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Main {
@@ -16,6 +18,26 @@ public class Main {
     System.out.println("I own " + turtleCount + " " + pluralize("turtle", turtleCount) + ".");
 
     flipNHeads(3);
+  }
+
+  // method uses LocalDataTime object to print out current time to console by the second.
+  // must be manually killed with CTRL + C (or "Stop" if running in an IDE).
+  // each second should only be printd once, format is HH:mm:ss
+  public static void clock() {
+    LocalDateTime now = LocalDateTime.now();
+    int priorSecond = now.getSecond();
+    int second = priorSecond;
+
+    while (true) {
+      while (priorSecond == second) {
+        second = now.getSecond();
+      }
+      // int hour = now.getHour();
+      // int minute = now.getMinute();
+      
+      String timeNow = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+      System.out.println(timeNow);
+    }
   }
 
   // function accepts an int and "flips coins" until n heads are flipped in a row
