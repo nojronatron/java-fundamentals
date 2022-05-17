@@ -18,6 +18,8 @@ public class Main {
     System.out.println("I own " + turtleCount + " " + pluralize("turtle", turtleCount) + ".");
 
     flipNHeads(3);
+
+    clock();
   }
 
   // method uses LocalDataTime object to print out current time to console by the second.
@@ -25,15 +27,20 @@ public class Main {
   // each second should only be printd once, format is HH:mm:ss
   public static void clock() {
     LocalDateTime now = LocalDateTime.now();
+    boolean display = true;
     int priorSecond = now.getSecond();
     int second = priorSecond;
 
     while (true) {
       while (priorSecond == second) {
+        now = LocalDateTime.now();
         second = now.getSecond();
       }
-      // int hour = now.getHour();
-      // int minute = now.getMinute();
+
+      priorSecond = second;
+      now = LocalDateTime.now();
+      int hour = now.getHour();
+      int minute = now.getMinute();
       
       String timeNow = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
       System.out.println(timeNow);
