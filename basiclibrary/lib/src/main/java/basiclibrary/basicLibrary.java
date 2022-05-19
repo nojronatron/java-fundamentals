@@ -3,10 +3,7 @@
  */
 package basiclibrary;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class basicLibrary {
     public int[] roll (int numRolls) {
@@ -115,5 +112,12 @@ public class basicLibrary {
 
         //  return that skipped values string to the caller
         return resultString.toString();
+    }
+
+    public static String tally(List<String> votes) {
+        //  tally the votes and return string with the string that got the most votes
+        String mostVotes = " ";
+
+        return mostVotes;
     }
 }

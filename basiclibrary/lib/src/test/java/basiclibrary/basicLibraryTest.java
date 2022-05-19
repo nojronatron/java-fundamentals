@@ -116,4 +116,13 @@ class basicLibraryTest {
         assertTrue(actualResult.length() > 0);
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test void libraryReturnsMostVotesWinnerName() {
+        // arrange
+
+        // act
+        
+        // assert
+        fail();
+    }
 }
