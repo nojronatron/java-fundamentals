@@ -74,4 +74,9 @@ public class basicLibrary {
 
         return inputMDArr[smallestArrayOuterID];
     }
+
+    public static String analyzeWeatherData(int[][] oneMonthWxData) {
+        
+        return "testing";
+    }
 }
