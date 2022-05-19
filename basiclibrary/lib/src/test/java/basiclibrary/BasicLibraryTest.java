@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class basicLibraryTest {
+class BasicLibraryTest {
     @Test void libraryRollMethodReturnsCorrectLengthArray() {
         // arrange
         basicLibrary classUnderTest = new basicLibrary();
@@ -20,7 +20,7 @@ class basicLibraryTest {
         int[] actualResult = classUnderTest.roll(rolls);
 
         // assert
-        assertTrue(actualResult.length == expectedArrayLength, "roll(4) should return an array with length of 4");
+        assertEquals(actualResult.length, expectedArrayLength, "roll(4) should return an array with length of 4");
     }
 
     @Test void libraryRollMethodReturnsArrayWithNumsOneThruSix() {
@@ -39,7 +39,7 @@ class basicLibraryTest {
         }
 
         // assert
-        assertTrue(truthTracker == rolls, "roll(4) should return digits 1 through 6");
+        assertEquals(truthTracker, rolls, "roll(4) should return digits 1 through 6");
     }
 
     @Test void libraryRollContainDuplicatesTests() {
@@ -119,10 +119,23 @@ class basicLibraryTest {
 
     @Test void libraryReturnsMostVotesWinnerName() {
         // arrange
+        ArrayList<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+
+        String expectedResult = "Bush received the most votes!";
 
         // act
-        
+        String actualResult = basicLibrary.tally(votes);
+
         // assert
-        fail();
+        assertEquals(expectedResult, actualResult, "Bush should be the highest vote getter.");
     }
 }
