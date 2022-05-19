@@ -96,10 +96,13 @@ public class basicLibrary {
             maxTemp = Math.max(tempTemp, maxTemp);
         }
 
+        StringBuilder resultString = new StringBuilder();
+        resultString.append("High: ").append(maxTemp).append("\n");
+        resultString.append("Low: ").append(minTemp).append("\n");
+
         //  iterate from min value to max value and dump MISSING values into a string
         int currentTemp = minTemp;
         int nextTemp = 0;
-        StringBuilder resultString = new StringBuilder();
 
         for (int idx=minTemp; idx <= maxTemp; idx++) {
             if (wxHashSet.contains(idx)) {
