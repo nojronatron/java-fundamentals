@@ -39,20 +39,18 @@ public class basicLibrary {
     }
 
     public static float averageValueOfArray(int[] inputArray) {
-        float result = 0f;
         int accumulator = 0;
 
         for(int item: inputArray) {
             accumulator += item;
         }
 
-        result = (float) accumulator / inputArray.length;
+        float result = (float) accumulator / inputArray.length;
 
         return result;
     }
 
     public static int[] lowestAverageArrayIn2dArr(int[][] inputMDArr) {
-        int prevAccumulator = Integer.MAX_VALUE;
         int smallestArrayOuterID = 0;
         float smallestAverage = Float.MAX_VALUE;
 
@@ -98,8 +96,6 @@ public class basicLibrary {
         resultString.append("Low: ").append(minTemp).append("\n");
 
         //  iterate from min value to max value and dump MISSING values into a string
-        int currentTemp = minTemp;
-        int nextTemp = 0;
 
         for (int idx=minTemp; idx <= maxTemp; idx++) {
             if (wxHashSet.contains(idx)) {
@@ -116,7 +112,23 @@ public class basicLibrary {
 
     public static String tally(List<String> votes) {
         //  tally the votes and return string with the string that got the most votes
-        String mostVotes = " ";
+        String mostVotes = "none";
+        HashMap<String, Integer> voteTally = new HashMap<>();
+        int maxVotes = 0;
+
+        for(String vote: votes) {
+            if (voteTally.containsKey(vote)) {
+                int voteCount = voteTally.get(vote);
+                voteCount++;
+                voteTally.put(vote, voteCount);
+                maxVotes = Math.max(maxVotes, voteCount);
+                if (maxVotes == voteCount) {
+                    mostVotes = vote;
+                }
+            } else {
+                voteTally.put(vote, 1);
+            }
+        }
 
         return mostVotes;
     }

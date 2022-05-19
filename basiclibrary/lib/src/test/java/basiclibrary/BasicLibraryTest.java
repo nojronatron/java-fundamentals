@@ -130,7 +130,7 @@ class BasicLibraryTest {
         votes.add("Hedge");
         votes.add("Bush");
 
-        String expectedResult = "Bush received the most votes!";
+        String expectedResult = "Bush";
 
         // act
         String actualResult = basicLibrary.tally(votes);
