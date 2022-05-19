@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class basicLibraryTest {
+class BasicLibraryTest {
     @Test void libraryRollMethodReturnsCorrectLengthArray() {
         // arrange
         basicLibrary classUnderTest = new basicLibrary();
@@ -20,7 +20,7 @@ class basicLibraryTest {
         int[] actualResult = classUnderTest.roll(rolls);
 
         // assert
-        assertTrue(actualResult.length == expectedArrayLength, "roll(4) should return an array with length of 4");
+        assertEquals(actualResult.length, expectedArrayLength, "roll(4) should return an array with length of 4");
     }
 
     @Test void libraryRollMethodReturnsArrayWithNumsOneThruSix() {
@@ -39,7 +39,7 @@ class basicLibraryTest {
         }
 
         // assert
-        assertTrue(truthTracker == rolls, "roll(4) should return digits 1 through 6");
+        assertEquals(truthTracker, rolls, "roll(4) should return digits 1 through 6");
     }
 
     @Test void libraryRollContainDuplicatesTests() {
@@ -90,5 +90,52 @@ class basicLibraryTest {
         for(int idx=0; idx < expectedResult.length; idx++) {
             assertEquals(expectedResult[idx], actualResult[idx]);
         }
+    }
+    @Test void libraryReturnsValidAnalyzedWeatherDataAsString() {
+        // arrange
+        String expectedResult = "High: 72\n" +
+                "Low: 51\n" +
+                "Never saw temperature: 63\n" +
+                "Never saw temperature: 67\n" +
+                "Never saw temperature: 68\n" +
+                "Never saw temperature: 69\n";
+
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
+        };
+
+        // act
+        String actualResult = basicLibrary.analyzeWeatherData(weeklyMonthTemperatures);
+        System.out.println("expected:\n" + expectedResult);
+        System.out.println("\nactual:\n" + actualResult);
+
+        //  assert
+        assertTrue(actualResult.length() > 0);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test void libraryReturnsMostVotesWinnerName() {
+        // arrange
+        ArrayList<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+
+        String expectedResult = "Bush";
+
+        // act
+        String actualResult = basicLibrary.tally(votes);
+
+        // assert
+        assertEquals(expectedResult, actualResult, "Bush should be the highest vote getter.");
     }
 }

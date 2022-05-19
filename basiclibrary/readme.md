@@ -7,6 +7,8 @@ This Lab work is aimed at exercising knowledge and gaining experience with:
 - Arrays in Java  
 - Creating Tests in IntelliJ IDEA  
 - Test-Driven Development (TDD)  
+- Building Java projects using Gradle  
+- Executing Gradle Tests in the Terminal  
 
 ## Project Info
 
@@ -20,6 +22,8 @@ Utilize static methods on basicLibrary for these functions:
 
 - basicLibrary.averageValueOfArray(int[]): Returns the avg of the values within supplied array.  
 - basicLibrary.lowestAverageArrayIn2dArr(int[][]): Finds the inner array with the lowest average among its values.  
+- basicLibrary.analyzeWeatherData(int[][]): Returns High and Low temps within a month range, and finds temperature readings that are NOT included in the month's set of data.  
+- basicLibrary.tally(ArrayList<String>): Analyzes an ArrayList of votes for various plant categories, and returns the "highest voted" one by name as a String.  
 
 ## Build and Run
 

@@ -3,8 +3,7 @@
  */
 package basiclibrary;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class basicLibrary {
     public int[] roll (int numRolls) {
@@ -40,20 +39,18 @@ public class basicLibrary {
     }
 
     public static float averageValueOfArray(int[] inputArray) {
-        float result = 0f;
         int accumulator = 0;
 
         for(int item: inputArray) {
             accumulator += item;
         }
 
-        result = (float) accumulator / inputArray.length;
+        float result = (float) accumulator / inputArray.length;
 
         return result;
     }
 
     public static int[] lowestAverageArrayIn2dArr(int[][] inputMDArr) {
-        int prevAccumulator = Integer.MAX_VALUE;
         int smallestArrayOuterID = 0;
         float smallestAverage = Float.MAX_VALUE;
 
@@ -73,5 +70,66 @@ public class basicLibrary {
         }
 
         return inputMDArr[smallestArrayOuterID];
+    }
+
+    public static String analyzeWeatherData(int[][] oneMonthWxData) {
+
+        //  use a HashSet<Integer> to track unique values
+        HashSet<Integer> wxHashSet = new HashSet<>();
+        for(int[] week: oneMonthWxData) {
+            for(int day: week) {
+                wxHashSet.add(day);
+            }
+        }
+
+        //  find the min and max values
+        int minTemp = Integer.MAX_VALUE;
+        int maxTemp = Integer.MIN_VALUE;
+
+        for (int tempTemp : wxHashSet) {
+            minTemp = Math.min(tempTemp, minTemp);
+            maxTemp = Math.max(tempTemp, maxTemp);
+        }
+
+        StringBuilder resultString = new StringBuilder();
+        resultString.append("High: ").append(maxTemp).append("\n");
+        resultString.append("Low: ").append(minTemp).append("\n");
+
+        //  iterate from min value to max value and dump MISSING values into a string
+
+        for (int idx=minTemp; idx <= maxTemp; idx++) {
+            if (wxHashSet.contains(idx)) {
+                ; // do nothing if found
+            } else {
+                // IntelliJ IDEA suggestion using chained append methods
+                resultString.append("Never saw temperature: ").append(idx).append("\n");
+            }
+        }
+
+        //  return that skipped values string to the caller
+        return resultString.toString();
+    }
+
+    public static String tally(List<String> votes) {
+        //  tally the votes and return string with the string that got the most votes
+        String mostVotes = "none";
+        HashMap<String, Integer> voteTally = new HashMap<>();
+        int maxVotes = 0;
+
+        for(String vote: votes) {
+            if (voteTally.containsKey(vote)) {
+                int voteCount = voteTally.get(vote);
+                voteCount++;
+                voteTally.put(vote, voteCount);
+                maxVotes = Math.max(maxVotes, voteCount);
+                if (maxVotes == voteCount) {
+                    mostVotes = vote;
+                }
+            } else {
+                voteTally.put(vote, 1);
+            }
+        }
+
+        return mostVotes;
     }
 }
