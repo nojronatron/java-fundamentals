@@ -93,6 +93,13 @@ class basicLibraryTest {
     }
     @Test void libraryReturnsValidAnalyzedWeatherDataAsString() {
         // arrange
+        String expectedResult = "High: 72\n" +
+                "Low: 51\n" +
+                "Never saw temperature: 63\n" +
+                "Never saw temperature: 67\n" +
+                "Never saw temperature: 68\n" +
+                "Never saw temperature: 69\n";
+
         int[][] weeklyMonthTemperatures = {
                 {66, 64, 58, 65, 71, 57, 60},
                 {57, 65, 65, 70, 72, 65, 51},
@@ -102,9 +109,11 @@ class basicLibraryTest {
 
         // act
         String actualResult = basicLibrary.analyzeWeatherData(weeklyMonthTemperatures);
-        Boolean expectedResultIsNotAnEmptyString = actualResult.length() > 0;
+        System.out.println("expected:\n" + expectedResult);
+        System.out.println("\nactual:\n" + actualResult);
 
         //  assert
-        assertEquals(true, expectedResultIsNotAnEmptyString);
+        assertTrue(actualResult.length() > 0);
+        assertEquals(expectedResult, actualResult);
     }
 }
