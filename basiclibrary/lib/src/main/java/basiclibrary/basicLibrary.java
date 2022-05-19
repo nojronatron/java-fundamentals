@@ -4,6 +4,8 @@
 package basiclibrary;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 
 public class basicLibrary {
@@ -76,7 +78,39 @@ public class basicLibrary {
     }
 
     public static String analyzeWeatherData(int[][] oneMonthWxData) {
-        
-        return "testing";
+
+        //  use a HashSet<Integer> to track unique values
+        HashSet<Integer> wxHashSet = new HashSet<>();
+        for(int[] week: oneMonthWxData) {
+            for(int day: week) {
+                wxHashSet.add(day);
+            }
+        }
+
+        //  find the min and max values
+        int minTemp = Integer.MAX_VALUE;
+        int maxTemp = Integer.MIN_VALUE;
+
+        for (int tempTemp : wxHashSet) {
+            minTemp = Math.min(tempTemp, minTemp);
+            maxTemp = Math.max(tempTemp, maxTemp);
+        }
+
+        //  iterate from min value to max value and dump MISSING values into a string
+        int currentTemp = minTemp;
+        int nextTemp = 0;
+        StringBuilder resultString = new StringBuilder();
+
+        for (int idx=minTemp; idx <= maxTemp; idx++) {
+            if (wxHashSet.contains(idx)) {
+                ; // do nothing if found
+            } else {
+                // IntelliJ IDEA suggestion using chained append methods
+                resultString.append("Never saw temperature: ").append(idx).append("\n");
+            }
+        }
+
+        //  return that skipped values string to the caller
+        return resultString.toString();
     }
 }

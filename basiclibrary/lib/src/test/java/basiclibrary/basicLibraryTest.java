@@ -100,7 +100,11 @@ class basicLibraryTest {
                 {65, 56, 55, 52, 55, 62, 57}
         };
 
+        // act
         String actualResult = basicLibrary.analyzeWeatherData(weeklyMonthTemperatures);
-        Boolean expectedResultIsAString = 
+        Boolean expectedResultIsNotAnEmptyString = actualResult.length() > 0;
+
+        //  assert
+        assertEquals(true, expectedResultIsNotAnEmptyString);
     }
 }
