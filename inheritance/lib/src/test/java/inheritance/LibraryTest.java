@@ -16,11 +16,36 @@ class LibraryTest {
         String expectedRestaurantName = "McDo's";
         Restaurant sut = new Restaurant(expectedRestaurantName);
 
-        String myPattern = expectedRestaurantName;
-        Pattern pattern = Pattern.compile(myPattern, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(expectedRestaurantName, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(sut.toString());
         boolean matchFound = matcher.find();
 
         assertEquals(expectedMatchFound, matchFound, "Restaurant constructor should set name property.");
+    }
+
+    @Test void testReviewToStringFunctionsAsExpected(){
+        boolean expectedMatchFound = true;
+        String expectedAuthorName = "Alpha";
+        String expectedReviewText = "biglongreview";
+        int expectedStarsRating = 3;
+
+        Review sut = new Review(expectedAuthorName, expectedReviewText, expectedStarsRating);
+        String sutToString = sut.toString();
+
+        Pattern authorNamePattern = Pattern.compile(expectedAuthorName, Pattern.CASE_INSENSITIVE);
+        Matcher authorNameMatcher = authorNamePattern.matcher(sutToString);
+        boolean authorNameMatchFound = authorNameMatcher.find();
+
+        Pattern reviewTextPattern = Pattern.compile(expectedReviewText, Pattern.CASE_INSENSITIVE);
+        Matcher reviewTextMatcher = reviewTextPattern.matcher(sutToString);
+        boolean reviewTextMatchFound = reviewTextMatcher.find();
+
+        Pattern starsRatingPattern = Pattern.compile(String.valueOf(expectedStarsRating), Pattern.CASE_INSENSITIVE);
+        Matcher starsRatingMatcher = starsRatingPattern.matcher(sutToString);
+        boolean starsRatingMatchFound = starsRatingMatcher.find();
+
+        assertTrue(authorNameMatchFound, "Review constructor should set author property.");
+        assertTrue(reviewTextMatchFound, "Review constructor should set review body property.");
+        assertTrue(starsRatingMatchFound, "Review constructor should set star rating property.");
     }
 }

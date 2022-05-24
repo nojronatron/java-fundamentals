@@ -32,7 +32,7 @@
 ### Instance Methods
 
 [ ] Add an instance method 'addReview' to the Restaurant class, that takes in a Review type parameter and adds it to the Restaurant instance.  
-[ ] Add unitests to ensure the method addReview works by creating an association between Restaurant and Review.  
+[ ] Add unittests to ensure the method addReview works by creating an association between Restaurant and Review.  
 
 ### Associating Reviews
 
