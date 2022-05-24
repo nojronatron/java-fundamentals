@@ -5,18 +5,20 @@ import java.util.ArrayList;
 public class Restaurant {
     String name;
     int stars; // 1-5 rating
-    int price; // 1-5 dollar signs
+    int priceCategory; // 1-5 dollar signs
     ArrayList<Review> reviews;
-    public Restaurant(String name) {
+    public Restaurant(String name, int priceCategory) {
         this.name = name;
-        stars = 0;
-        price = 0;
+        this.stars = 0;
+        this.priceCategory = priceCategory;
         reviews = new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        return "Restaurant " + this.name + " has a star rating of " + stars +
-                "and a price rating of " + price;
+        return "Restaurant " + this.name +
+                " has a star rating of " + stars +
+                "a list of " + this.reviews.size() +
+                "reviews, and a price rating of " + priceCategory;
     }
 }

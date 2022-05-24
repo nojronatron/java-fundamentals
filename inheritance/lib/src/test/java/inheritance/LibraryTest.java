@@ -14,13 +14,20 @@ class LibraryTest {
     @Test void testRestaurantToStringFunctionsAsExpected() {
         boolean expectedMatchFound = true;
         String expectedRestaurantName = "McDo's";
-        Restaurant sut = new Restaurant(expectedRestaurantName);
+        int expectedPriceCategory = 3;
 
-        Pattern pattern = Pattern.compile(expectedRestaurantName, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(sut.toString());
-        boolean matchFound = matcher.find();
+        Restaurant sut = new Restaurant(expectedRestaurantName, expectedPriceCategory);
 
-        assertEquals(expectedMatchFound, matchFound, "Restaurant constructor should set name property.");
+        Pattern namePattern = Pattern.compile(expectedRestaurantName, Pattern.CASE_INSENSITIVE);
+        Matcher nameMatcher = namePattern.matcher(sut.toString());
+        boolean nameMatchFound = nameMatcher.find();
+
+        Pattern priceCategoryPattern = Pattern.compile(String.valueOf(expectedPriceCategory), Pattern.CASE_INSENSITIVE);
+        Matcher priceCategoryMatcher = priceCategoryPattern.matcher(sut.toString());
+        boolean priceCategoryMatchFound = priceCategoryMatcher.find();
+
+        assertEquals(expectedMatchFound, nameMatchFound, "Restaurant constructor should set name property.");
+        assertTrue(priceCategoryMatchFound, "Restaurant constructor should set priceCategory property.");
     }
 
     @Test void testReviewToStringFunctionsAsExpected(){
