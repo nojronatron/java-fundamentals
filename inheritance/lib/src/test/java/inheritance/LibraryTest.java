@@ -4,11 +4,23 @@
 package inheritance;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
-    @Test void someLibraryMethodReturnsTrue() {
-        Library classUnderTest = new Library();
-        assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
+    @Test void testRestaurantToStringFunctionsAsExpected() {
+        boolean expectedMatchFound = true;
+        String expectedRestaurantName = "McDo's";
+        Restaurant sut = new Restaurant(expectedRestaurantName);
+
+        String myPattern = expectedRestaurantName;
+        Pattern pattern = Pattern.compile(myPattern, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(sut.toString());
+        boolean matchFound = matcher.find();
+
+        assertEquals(expectedMatchFound, matchFound, "Restaurant constructor should set name property.");
     }
 }
