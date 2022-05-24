@@ -14,11 +14,21 @@ public class Restaurant {
         reviews = new ArrayList<>();
     }
 
+    public boolean addReview(Review review) {
+        try {
+            reviews.add(review);
+        } catch (Exception ex) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Restaurant " + this.name +
                 " has a star rating of " + stars +
-                "a list of " + this.reviews.size() +
-                "reviews, and a price rating of " + priceCategory;
+                " a list of " + this.reviews.size() +
+                " reviews, and a price rating of " + priceCategory;
     }
 }

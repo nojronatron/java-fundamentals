@@ -31,7 +31,6 @@ class LibraryTest {
     }
 
     @Test void testReviewToStringFunctionsAsExpected(){
-        boolean expectedMatchFound = true;
         String expectedAuthorName = "Alpha";
         String expectedReviewText = "biglongreview";
         int expectedStarsRating = 3;
@@ -54,5 +53,32 @@ class LibraryTest {
         assertTrue(authorNameMatchFound, "Review constructor should set author property.");
         assertTrue(reviewTextMatchFound, "Review constructor should set review body property.");
         assertTrue(starsRatingMatchFound, "Review constructor should set star rating property.");
+    }
+
+    @Test void testRestaurantClassAddsReviewsProperly() {
+        int expectedReviewCount = 1;
+        int expectedReviewCount2 = 2;
+        String expectedNameAuthor1 = "Alpha Bravo";
+        String expectedReviewText1 = "The burger was yummie.";
+        int expectedReviewRating1 = 4;
+        String expectedNameAuthor2 = "Charlie Delta";
+        String expectedReviewText2 = "Don't buy salad at a burger joint.";
+        int expectedReviewRating2 = 2;
+
+        Review review1 = new Review(expectedNameAuthor1, expectedReviewText1, expectedReviewRating1);
+        Review review2 = new Review(expectedNameAuthor2, expectedReviewText2, expectedReviewRating2);
+
+        Restaurant mcDonalds = new Restaurant("McDo's", 3);
+
+        assertTrue(mcDonalds.reviews.size() == 0);
+
+        mcDonalds.addReview(review1);
+
+        assertTrue(mcDonalds.reviews.size() == expectedReviewCount);
+        System.out.println(mcDonalds.toString());
+
+        mcDonalds.addReview(review2);
+
+        assertTrue(mcDonalds.reviews.size() == expectedReviewCount2);
     }
 }
