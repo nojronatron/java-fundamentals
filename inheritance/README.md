@@ -47,7 +47,34 @@
 
 ## Library Architecture
 
+This is a very simple Java Library with 2 Classes: Restaurant; Review.  
 
+![Restaurant and Review Package Architecture](res/Restaurant-Review-Package-Model.jpg);
+
+Restaurant Class is:
+
+- A concrete Class with various members
+- A constructor with parameters for initializing an object instance
+- Properties name, stars, and priceCategory
+- An instance method to add a Review
+
+Review Class is:
+
+- A concrete Class with various members
+- A constructor with parameters for initializing an object instance
+- Properties for body (review text), author (review Author), and starRating (Ratings Stars of the review)
+
+Both Classes have overridden toString() methods that will return informative state text to the calling method.  
+
+When a Restaurant instance is added, ensure a Name and Price Category is included in the constructor.  
+When creating Reviews, ensure the Author Name, Review Body, and Stars Rating (whole number) are included.  
+
+When a Review is added to a Restaurant, the Star Rating will update automatically.
+
+## Build and Test
+
+Install Gradle for your platform.  
+Run `./gradlew test` from the Terminal to test the Package from the Package Root directory.  
 
 ## Footer
 
