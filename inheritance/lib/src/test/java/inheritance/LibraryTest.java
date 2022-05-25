@@ -203,6 +203,79 @@ class LibraryTest {
                 "Instantiated Theater should not have any reviews yet.");
     }
 
+    @Test void testTheaterClassCanAddReview() {
+        String expectedTheaterName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 0;
+        String expectedReviewAuthorName = "Foo Bar";
+        int expectedReviewsWritten = 1;
+        String expectedReviewBody = "This review is full of lots of words. And sentence fragments.";
+        int expectedReviewStarsRating = 5;
+
+        User expectedUser = new User(expectedReviewAuthorName);
+        Theater theater = new Theater(expectedTheaterName, expectedPriceCategory);
+        Review review = new Review(expectedUser, expectedReviewBody, expectedReviewStarsRating);
+        theater.addReview(review);
+
+        System.out.println("theater.toString() => " + theater);
+        System.out.println("user.toString() => " + expectedUser);
+        System.out.println("review.toString() => " + review);
+
+        String actualTheaterName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsWritten = theater.reviews.size();
+        String actualReviewBody = theater.reviews.get(0).body;
+        int actualReviewStarsRating = theater.reviews.get(0).stars;
+        String actualReviewAuthorName = theater.reviews.get(0).author.name;
+
+        assertEquals(expectedTheaterName, actualTheaterName);
+        assertEquals(expectedPriceCategory, actualPriceCategory);
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount);
+        assertEquals(expectedReviewsWritten, actualReviewsWritten);
+        assertEquals(expectedReviewBody, actualReviewBody);
+        assertEquals(expectedReviewStarsRating, actualReviewStarsRating);
+        assertEquals(expectedReviewAuthorName, actualReviewAuthorName);
+    }
+
+    @Test void testTheaterClassCanAddReviewWithMovieName() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 1;
+        String expectedReviewAuthorName = "Foo Bar";
+        int expectedReviewsWritten = 1;
+        String expectedReviewBody = "This review is full of lots of words. And sentence fragments.";
+        int expectedReviewStarsRating = 5;
+        String expectedMovie3Title = "The Preventers";
+
+        User expectedUser = new User(expectedReviewAuthorName);
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+        Review review = new Review(expectedUser, expectedReviewBody, expectedReviewStarsRating);
+        theater.addReview(review, expectedMovie3Title);
+
+        System.out.println("theater.toString() => " + theater);
+        System.out.println("user.toString() => " + expectedUser);
+        System.out.println("review.toString() => " + review);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsWritten = theater.reviews.size();
+        String actualReviewBody = theater.reviews.get(0).body;
+        int actualReviewStarsRating = theater.reviews.get(0).stars;
+        String actualMovie3Title = theater.moviesShowing.get(0).toString();
+        String actualReviewAuthorName = theater.reviews.get(0).author.name;
+
+        assertEquals(expectedName, actualName);
+        assertEquals(expectedPriceCategory, actualPriceCategory);
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount);
+        assertEquals(expectedReviewsWritten, actualReviewsWritten);
+        assertEquals(expectedReviewBody, actualReviewBody);
+        assertEquals(expectedReviewStarsRating, actualReviewStarsRating);
+        assertEquals(expectedMovie3Title, actualMovie3Title);
+        assertEquals(expectedReviewAuthorName, actualReviewAuthorName);
+    }
+
     @Test void testAddMovieListingToTheaterFunctionsProperly() {
         String expectedName = "ACME Theater Co.";
         int expectedPriceCategory = 2;

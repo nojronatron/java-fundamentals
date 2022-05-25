@@ -36,4 +36,22 @@ public class Theater extends Business {
 
         return title;
     }
+
+    public boolean addReview(Review review, String movieTitle) {
+        boolean addedMovie = this.addMovie(movieTitle);
+        boolean addedReview = this.addReview(review);
+
+        if (addedReview && addedMovie) {
+            return true;
+        }
+
+        try {
+            this.removeMovie(movieTitle);
+            reviews.remove(review);
+        } catch (Exception ex) {
+            System.out.println("Unable to add Movie or Review, error message is: " + ex.getMessage());
+        }
+
+        return false;
+    }
 }
