@@ -41,15 +41,15 @@
 ### Stretch Goals
 
 [ ] Some Restaurants are part of a chain. Implement a means to associate all chain restaurants e.g. McDonald's, and add unittests to verify functionality.  
-[ ] Add an updateStarts method to the Review class to update stars *for that review* and, if the Review is associated with a Restaurant the stars for *that restaurant* are updated.
-[ ] Refactor your code and get rid of that instance variable for stars and instead make it an instance *method* that calcualtes a restaraunt's star rating on the fly when called.  
+[ ] Add an updateStars method to the Review class to update stars *for that review* and, if the Review is associated with a Restaurant the stars for *that restaurant* are updated.
+[K] Refactor your code and get rid of that instance variable for stars and instead make it an instance *method* that calculates a restaurant star rating on the fly when called.  
 [ ] Create another class for User, as in Author of a Review, and limit each User to a single review per Restaurant.  
 
 ## Library Architecture
 
 This is a very simple Java Library with 2 Classes: Restaurant; Review.  
 
-![Restaurant and Review Package Architecture](res/Restaurant-Review-Package-Model.jpg);
+![Restaurant and Review Package Architecture](res/Restaurant-Review-Package-Model.jpg)  
 
 Restaurant Class is:
 
