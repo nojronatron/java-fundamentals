@@ -25,15 +25,15 @@ public class Theater extends Business {
         return true;
     }
 
-    public boolean removeMovie(String title) {
+    public String removeMovie(String title) {
         // attempts to remove a movie title from the arraylist as supplied by caller
         try{
             moviesShowing.remove(title);
         } catch (Exception ex) {
             System.out.println("Movie not removed due to a problem: " + ex.getMessage());
-            return false;
+            return "";
         }
 
-        return true;
+        return title;
     }
 }

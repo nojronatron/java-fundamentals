@@ -175,4 +175,110 @@ class LibraryTest {
         assertEquals(expectedPriceCategory, actualPriceCategory,
                 "Newly instantiated Shop should have correctly assigned priceCategory.");
     }
+
+    @Test void testTheaterClassCanBeInstantiated() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 3;
+        int expectedMoviesShowingCount = 0;
+        int expectedReviewsCount = 0;
+
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsCount = theater.reviews.size();
+
+        System.out.println("Theater.toString() => " + theater);
+
+        assertEquals(expectedName, actualName,
+                "Instantiated Theater name should be properly set by constructor.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Instantiated Theater priceCategory should be properly set by constructor");
+        assertNotNull(theater.moviesShowing,
+                "Instantiated Theater moviesShowing should not be null.");
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount,
+                "Instantiated Theater moviesShowing array should be empty (zero count).");
+        assertEquals(expectedReviewsCount, actualReviewsCount,
+                "Instantiated Theater should not have any reviews yet.");
+    }
+
+    @Test void testAddMovieListingToTheaterFunctionsProperly() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 3;
+        int expectedReviewsCount = 0;
+        String expectedMovie1Title = "I Am Bartman";
+        String expectedMovie2Title = "Mathilda and Lois";
+        String expectedMovie3Title = "The Preventers";
+
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+        theater.addMovie(expectedMovie1Title);
+        theater.addMovie(expectedMovie2Title);
+        theater.addMovie(expectedMovie3Title);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsCount = theater.reviews.size();
+
+        System.out.println("Theater.toString() => " + theater);
+
+        assertEquals(expectedName, actualName,
+                "Instantiated Theater name should be properly set by constructor.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Instantiated Theater priceCategory should be properly set by constructor");
+        assertNotNull(theater.moviesShowing,
+                "Instantiated Theater moviesShowing should not be null.");
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount,
+                "Instantiated Theater moviesShowing array should be 3.");
+        assertEquals(expectedReviewsCount, actualReviewsCount,
+                "Instantiated Theater should not have any reviews yet.");
+    }
+
+    @Test void testRemoveMovieListingFromTheaterFunctionsProperly() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 3;
+        int expectedReviewsCount = 0;
+        String expectedMovie1Title = "I Am Bartman";
+        String expectedMovie2Title = "Mathilda and Lois";
+        String expectedMovie3Title = "The Preventers";
+
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+        theater.addMovie(expectedMovie1Title);
+        theater.addMovie(expectedMovie2Title);
+        theater.addMovie(expectedMovie3Title);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsCount = theater.reviews.size();
+
+        System.out.println("Theater.toString() => " + theater);
+
+        assertEquals(expectedName, actualName,
+                "Instantiated Theater name should be properly set by constructor.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Instantiated Theater priceCategory should be properly set by constructor");
+        assertNotNull(theater.moviesShowing,
+                "Instantiated Theater moviesShowing should not be null.");
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount,
+                "Instantiated Theater moviesShowing array should be empty (zero count).");
+        assertEquals(expectedReviewsCount, actualReviewsCount,
+                "Instantiated Theater should not have any reviews yet.");
+
+        String actualRemoveResult = theater.removeMovie(expectedMovie2Title);
+        int expectedRemovedCount = 2;
+        int actualRemovedCount = theater.moviesShowing.size();
+
+        System.out.println("Movie to remove: " + expectedMovie2Title + "; actual movie removed: " + actualRemoveResult);
+
+        assertEquals(expectedMovie2Title, actualRemoveResult,
+                "Theater.removeMovie(name) should remove the specified movie from the collection " +
+                        "and return it to the caller without error.");
+        assertEquals(expectedRemovedCount, actualRemovedCount,
+                "Theater.removeMovie(name) should properly decrement the number of movies in moviesShowing " +
+                        "collection.");
+    }
 }

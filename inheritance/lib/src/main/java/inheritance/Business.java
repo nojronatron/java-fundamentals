@@ -39,6 +39,7 @@ public abstract class Business {
         return "Restaurant " + this.name +
                 " has a star rating of " + stars +
                 " a list of " + this.reviews.size() +
-                " reviews, and a price rating of " + priceCategory;
+                " reviews, and a price rating of " + priceCategory +
+                ".";
     }
 }
