@@ -2,7 +2,60 @@
 
 ## Purpose and Overview
 
-## Feature Tasks and Status
+## Feature Tasks and Status - Tuesday
+
+[X] Start with Monday's Feature Tasks and Status.  
+[X] Create a SHOPS Class with name, description, and dollar-sign rating.  
+[X] Update the REVIEW Class to allow reviewing Shops like Restaurants.  
+[X] Create a THEATER Class so users can review Theaters and the movies they are showing.  
+[X] Implement addMovie() and removeMovie() methods in the THEATER Class.  
+[X] Refactor REVIEW Class to review Shops, Theaters, and Restaurants.  
+[X] Implement a method that reviewers can use to add the Name of the Movie along with their review, OR NOT.  
+[X] Implement Constructors, reasonable toString() methods, and basic tests for all of the above Classes.  
+
+### Stretch Goals
+
+[ ] Add an updateStars() method in the REVIEW Class to update stars for a specified review.  
+[ ] Ensure an updated Review is associated with all reviewable Classed things.  
+[ ] Refactor your code to make star tracking an instance METHOD instead of a PROPERTY.  
+[partial] Create a USER Class so it can be tracked which reviews were written by the same user.  
+[ ] Ensure a single user instance cannot submit multiple reviews for the same reviewable thing.  
+
+### Gradle Build and Test Status
+
+```shell
+λ  java-fundamentals/inheritance comp-inheritance-two ✗ gradle build
+
+BUILD SUCCESSFUL in 591ms
+4 actionable tasks: 2 executed, 2 up-to-date
+λ  java-fundamentals/inheritance comp-inheritance-two ✗ ./gradlew test
+
+BUILD SUCCESSFUL in 379ms
+3 actionable tasks: 3 up-to-date
+λ  java-fundamentals/inheritance comp-inheritance-two ✗ 
+```
+
+In Summary:
+
+> gradle build => PASS!
+
+> ./gradlew test => PASS!  
+
+#### Test Details
+
+See the Documentation Updates and Library Architecture for details list of tests.  
+
+*Note*: Only the most critical tests were actually build and are passing.  
+
+Existing tests are high-code-coverage tests.  
+
+See [The Test File](/lib/src/test/java/inheritance/LibraryTest.java) for details.  
+
+### Documentation Updates
+
+See [Library Architecture](#Library-Architecture) later in this doc for the latest design documentation.  
+
+## Feature Tasks and Status - Monday
 
 ### Restaurant Class
 
