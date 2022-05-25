@@ -2,7 +2,7 @@ package inheritance;
 
 import java.util.ArrayList;
 
-public class Business {
+public abstract class Business {
     public String name;
     public float stars;
     public int priceCategory;

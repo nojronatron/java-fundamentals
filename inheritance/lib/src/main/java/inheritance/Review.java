@@ -13,7 +13,7 @@ public class Review {
     @Override
     public String toString() {
         return "Author " + this.author.name +
-                "gave " + stars +
-                " stars, and wrote the following review " + this.body + ".";
+                " voted " + stars +
+                " stars, and wrote the following review: " + this.body;
     }
 }

@@ -125,5 +125,37 @@ class LibraryTest {
                 "Restaurant star ratings change when n additional Review is added.");
     }
 
-    
+    @Test void testReviewClassCanBeInstantiated() {
+        String expectedUsername = "Foo Bar";
+        String expectedReviewBody = "This review is full of lots of words. And sentence fragments.";
+        int expectedStarsRating = 5;
+
+        Review review = new Review(new User(expectedUsername), expectedReviewBody, 5);
+
+        System.out.println("review.toString() output => " + review);
+
+        assertEquals(expectedUsername, review.author.name,
+                "User.name should be recorded in the Review instance.");
+        assertEquals(expectedReviewBody, review.body,
+                "ReviewBody property should be updated in new Review instance.");
+        assertEquals(expectedStarsRating, review.stars,
+                "starsRating should be stored in review.stars in new Review instance.");
+    }
+
+    @Test void testUserClassCanBeInstantiated() {
+        String expectedUsername = "Foo Bar";
+        int expectedReviewsWritten = 0;
+
+        User user = new User(expectedUsername);
+
+        String actualUserName = user.name;
+        int actualReviewsWritten = user.reviewsWritten;
+
+        System.out.println("user.toString() output => " + user);
+
+        assertEquals(expectedReviewsWritten, actualReviewsWritten,
+                "Newly instantiated User object should start with 0 reviews written.");
+        assertEquals(expectedUsername, actualUserName,
+                "Newly instantiated User object should have name set properly.");
+    }
 }
