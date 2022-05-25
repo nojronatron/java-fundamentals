@@ -158,4 +158,21 @@ class LibraryTest {
         assertEquals(expectedUsername, actualUserName,
                 "Newly instantiated User object should have name set properly.");
     }
+
+    @Test void testShopClassCanBeInstantiated() {
+        String expectedShopName = "The FooBar Company";
+        int expectedPriceCategory = 4;
+
+        Shop shop = new Shop(expectedShopName, expectedPriceCategory);
+
+        String actualShopName = shop.name;
+        int actualPriceCategory = shop.priceCategory;
+
+        System.out.println("Shop Class toString() => " + shop);
+
+        assertEquals(expectedShopName, actualShopName,
+                "Newly instantiated Shop should have correctly assigned Name.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Newly instantiated Shop should have correctly assigned priceCategory.");
+    }
 }
