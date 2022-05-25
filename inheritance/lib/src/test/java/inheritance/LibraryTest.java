@@ -3,9 +3,7 @@
  */
 package inheritance;
 
-import com.sun.tools.attach.VirtualMachineDescriptor;
 import org.junit.jupiter.api.Test;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +34,9 @@ class LibraryTest {
         String expectedReviewText = "biglongreview";
         int expectedStarsRating = 3;
 
-        Review sut = new Review(expectedAuthorName, expectedReviewText, expectedStarsRating);
+        User author = new User(expectedAuthorName);
+
+        Review sut = new Review(author, expectedReviewText, expectedStarsRating);
         String sutToString = sut.toString();
 
         Pattern authorNamePattern = Pattern.compile(expectedAuthorName, Pattern.CASE_INSENSITIVE);
@@ -66,8 +66,11 @@ class LibraryTest {
         String expectedReviewText2 = "Don't buy salad at a burger joint.";
         int expectedReviewRating2 = 2;
 
-        Review review1 = new Review(expectedNameAuthor1, expectedReviewText1, expectedReviewRating1);
-        Review review2 = new Review(expectedNameAuthor2, expectedReviewText2, expectedReviewRating2);
+        User author1 = new User(expectedNameAuthor1);
+        User author2 = new User(expectedNameAuthor2);
+
+        Review review1 = new Review(author1, expectedReviewText1, expectedReviewRating1);
+        Review review2 = new Review(author2, expectedReviewText2, expectedReviewRating2);
 
         Restaurant mcDonalds = new Restaurant("McDo's", 3);
 
@@ -97,8 +100,11 @@ class LibraryTest {
         String expectedReviewText2 = "Don't buy salad at a burger joint.";
         int expectedReviewRating2 = 2;
 
-        Review review1 = new Review(expectedNameAuthor1, expectedReviewText1, expectedReviewRating1);
-        Review review2 = new Review(expectedNameAuthor2, expectedReviewText2, expectedReviewRating2);
+        User author1 = new User(expectedNameAuthor1);
+        User author2 = new User(expectedNameAuthor2);
+
+        Review review1 = new Review(author1, expectedReviewText1, expectedReviewRating1);
+        Review review2 = new Review(author2, expectedReviewText2, expectedReviewRating2);
 
         Restaurant mcDonalds = new Restaurant("McDo's", 3);
         System.out.println(mcDonalds);
@@ -117,5 +123,235 @@ class LibraryTest {
         actualStarRating = mcDonalds.stars;
         assertEquals(expectedStarRating3, actualStarRating,
                 "Restaurant star ratings change when n additional Review is added.");
+    }
+
+    @Test void testReviewClassCanBeInstantiated() {
+        String expectedUsername = "Foo Bar";
+        String expectedReviewBody = "This review is full of lots of words. And sentence fragments.";
+        int expectedStarsRating = 5;
+
+        Review review = new Review(new User(expectedUsername), expectedReviewBody, 5);
+
+        System.out.println("review.toString() output => " + review);
+
+        assertEquals(expectedUsername, review.author.name,
+                "User.name should be recorded in the Review instance.");
+        assertEquals(expectedReviewBody, review.body,
+                "ReviewBody property should be updated in new Review instance.");
+        assertEquals(expectedStarsRating, review.stars,
+                "starsRating should be stored in review.stars in new Review instance.");
+    }
+
+    @Test void testUserClassCanBeInstantiated() {
+        String expectedUsername = "Foo Bar";
+        int expectedReviewsWritten = 0;
+
+        User user = new User(expectedUsername);
+
+        String actualUserName = user.name;
+        int actualReviewsWritten = user.reviewsWritten;
+
+        System.out.println("user.toString() output => " + user);
+
+        assertEquals(expectedReviewsWritten, actualReviewsWritten,
+                "Newly instantiated User object should start with 0 reviews written.");
+        assertEquals(expectedUsername, actualUserName,
+                "Newly instantiated User object should have name set properly.");
+    }
+
+    @Test void testShopClassCanBeInstantiated() {
+        String expectedShopName = "The FooBar Company";
+        int expectedPriceCategory = 4;
+
+        Shop shop = new Shop(expectedShopName, expectedPriceCategory);
+
+        String actualShopName = shop.name;
+        int actualPriceCategory = shop.priceCategory;
+
+        System.out.println("Shop Class toString() => " + shop);
+
+        assertEquals(expectedShopName, actualShopName,
+                "Newly instantiated Shop should have correctly assigned Name.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Newly instantiated Shop should have correctly assigned priceCategory.");
+    }
+
+    @Test void testTheaterClassCanBeInstantiated() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 3;
+        int expectedMoviesShowingCount = 0;
+        int expectedReviewsCount = 0;
+
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsCount = theater.reviews.size();
+
+        System.out.println("Theater.toString() => " + theater);
+
+        assertEquals(expectedName, actualName,
+                "Instantiated Theater name should be properly set by constructor.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Instantiated Theater priceCategory should be properly set by constructor");
+        assertNotNull(theater.moviesShowing,
+                "Instantiated Theater moviesShowing should not be null.");
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount,
+                "Instantiated Theater moviesShowing array should be empty (zero count).");
+        assertEquals(expectedReviewsCount, actualReviewsCount,
+                "Instantiated Theater should not have any reviews yet.");
+    }
+
+    @Test void testTheaterClassCanAddReview() {
+        String expectedTheaterName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 0;
+        String expectedReviewAuthorName = "Foo Bar";
+        int expectedReviewsWritten = 1;
+        String expectedReviewBody = "This review is full of lots of words. And sentence fragments.";
+        int expectedReviewStarsRating = 5;
+
+        User expectedUser = new User(expectedReviewAuthorName);
+        Theater theater = new Theater(expectedTheaterName, expectedPriceCategory);
+        Review review = new Review(expectedUser, expectedReviewBody, expectedReviewStarsRating);
+        theater.addReview(review);
+
+        System.out.println("theater.toString() => " + theater);
+        System.out.println("user.toString() => " + expectedUser);
+        System.out.println("review.toString() => " + review);
+
+        String actualTheaterName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsWritten = theater.reviews.size();
+        String actualReviewBody = theater.reviews.get(0).body;
+        int actualReviewStarsRating = theater.reviews.get(0).stars;
+        String actualReviewAuthorName = theater.reviews.get(0).author.name;
+
+        assertEquals(expectedTheaterName, actualTheaterName);
+        assertEquals(expectedPriceCategory, actualPriceCategory);
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount);
+        assertEquals(expectedReviewsWritten, actualReviewsWritten);
+        assertEquals(expectedReviewBody, actualReviewBody);
+        assertEquals(expectedReviewStarsRating, actualReviewStarsRating);
+        assertEquals(expectedReviewAuthorName, actualReviewAuthorName);
+    }
+
+    @Test void testTheaterClassCanAddReviewWithMovieName() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 1;
+        String expectedReviewAuthorName = "Foo Bar";
+        int expectedReviewsWritten = 1;
+        String expectedReviewBody = "This review is full of lots of words. And sentence fragments.";
+        int expectedReviewStarsRating = 5;
+        String expectedMovie3Title = "The Preventers";
+
+        User expectedUser = new User(expectedReviewAuthorName);
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+        Review review = new Review(expectedUser, expectedReviewBody, expectedReviewStarsRating);
+        theater.addReview(review, expectedMovie3Title);
+
+        System.out.println("theater.toString() => " + theater);
+        System.out.println("user.toString() => " + expectedUser);
+        System.out.println("review.toString() => " + review);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsWritten = theater.reviews.size();
+        String actualReviewBody = theater.reviews.get(0).body;
+        int actualReviewStarsRating = theater.reviews.get(0).stars;
+        String actualMovie3Title = theater.moviesShowing.get(0).toString();
+        String actualReviewAuthorName = theater.reviews.get(0).author.name;
+
+        assertEquals(expectedName, actualName);
+        assertEquals(expectedPriceCategory, actualPriceCategory);
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount);
+        assertEquals(expectedReviewsWritten, actualReviewsWritten);
+        assertEquals(expectedReviewBody, actualReviewBody);
+        assertEquals(expectedReviewStarsRating, actualReviewStarsRating);
+        assertEquals(expectedMovie3Title, actualMovie3Title);
+        assertEquals(expectedReviewAuthorName, actualReviewAuthorName);
+    }
+
+    @Test void testAddMovieListingToTheaterFunctionsProperly() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 3;
+        int expectedReviewsCount = 0;
+        String expectedMovie1Title = "I Am Bartman";
+        String expectedMovie2Title = "Mathilda and Lois";
+        String expectedMovie3Title = "The Preventers";
+
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+        theater.addMovie(expectedMovie1Title);
+        theater.addMovie(expectedMovie2Title);
+        theater.addMovie(expectedMovie3Title);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsCount = theater.reviews.size();
+
+        System.out.println("Theater.toString() => " + theater);
+
+        assertEquals(expectedName, actualName,
+                "Instantiated Theater name should be properly set by constructor.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Instantiated Theater priceCategory should be properly set by constructor");
+        assertNotNull(theater.moviesShowing,
+                "Instantiated Theater moviesShowing should not be null.");
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount,
+                "Instantiated Theater moviesShowing array should be 3.");
+        assertEquals(expectedReviewsCount, actualReviewsCount,
+                "Instantiated Theater should not have any reviews yet.");
+    }
+
+    @Test void testRemoveMovieListingFromTheaterFunctionsProperly() {
+        String expectedName = "ACME Theater Co.";
+        int expectedPriceCategory = 2;
+        int expectedMoviesShowingCount = 3;
+        int expectedReviewsCount = 0;
+        String expectedMovie1Title = "I Am Bartman";
+        String expectedMovie2Title = "Mathilda and Lois";
+        String expectedMovie3Title = "The Preventers";
+
+        Theater theater = new Theater(expectedName, expectedPriceCategory);
+        theater.addMovie(expectedMovie1Title);
+        theater.addMovie(expectedMovie2Title);
+        theater.addMovie(expectedMovie3Title);
+
+        String actualName = theater.name;
+        int actualPriceCategory = theater.priceCategory;
+        int actualMoviesShowingCount = theater.moviesShowing.size();
+        int actualReviewsCount = theater.reviews.size();
+
+        System.out.println("Theater.toString() => " + theater);
+
+        assertEquals(expectedName, actualName,
+                "Instantiated Theater name should be properly set by constructor.");
+        assertEquals(expectedPriceCategory, actualPriceCategory,
+                "Instantiated Theater priceCategory should be properly set by constructor");
+        assertNotNull(theater.moviesShowing,
+                "Instantiated Theater moviesShowing should not be null.");
+        assertEquals(expectedMoviesShowingCount, actualMoviesShowingCount,
+                "Instantiated Theater moviesShowing array should be empty (zero count).");
+        assertEquals(expectedReviewsCount, actualReviewsCount,
+                "Instantiated Theater should not have any reviews yet.");
+
+        String actualRemoveResult = theater.removeMovie(expectedMovie2Title);
+        int expectedRemovedCount = 2;
+        int actualRemovedCount = theater.moviesShowing.size();
+
+        System.out.println("Movie to remove: " + expectedMovie2Title + "; actual movie removed: " + actualRemoveResult);
+
+        assertEquals(expectedMovie2Title, actualRemoveResult,
+                "Theater.removeMovie(name) should remove the specified movie from the collection " +
+                        "and return it to the caller without error.");
+        assertEquals(expectedRemovedCount, actualRemovedCount,
+                "Theater.removeMovie(name) should properly decrement the number of movies in moviesShowing " +
+                        "collection.");
     }
 }
