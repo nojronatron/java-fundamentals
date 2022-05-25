@@ -3,9 +3,7 @@
  */
 package inheritance;
 
-import com.sun.tools.attach.VirtualMachineDescriptor;
 import org.junit.jupiter.api.Test;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +34,9 @@ class LibraryTest {
         String expectedReviewText = "biglongreview";
         int expectedStarsRating = 3;
 
-        Review sut = new Review(expectedAuthorName, expectedReviewText, expectedStarsRating);
+        User author = new User(expectedAuthorName);
+
+        Review sut = new Review(author, expectedReviewText, expectedStarsRating);
         String sutToString = sut.toString();
 
         Pattern authorNamePattern = Pattern.compile(expectedAuthorName, Pattern.CASE_INSENSITIVE);
@@ -66,8 +66,11 @@ class LibraryTest {
         String expectedReviewText2 = "Don't buy salad at a burger joint.";
         int expectedReviewRating2 = 2;
 
-        Review review1 = new Review(expectedNameAuthor1, expectedReviewText1, expectedReviewRating1);
-        Review review2 = new Review(expectedNameAuthor2, expectedReviewText2, expectedReviewRating2);
+        User author1 = new User(expectedNameAuthor1);
+        User author2 = new User(expectedNameAuthor2);
+
+        Review review1 = new Review(author1, expectedReviewText1, expectedReviewRating1);
+        Review review2 = new Review(author2, expectedReviewText2, expectedReviewRating2);
 
         Restaurant mcDonalds = new Restaurant("McDo's", 3);
 
@@ -97,8 +100,11 @@ class LibraryTest {
         String expectedReviewText2 = "Don't buy salad at a burger joint.";
         int expectedReviewRating2 = 2;
 
-        Review review1 = new Review(expectedNameAuthor1, expectedReviewText1, expectedReviewRating1);
-        Review review2 = new Review(expectedNameAuthor2, expectedReviewText2, expectedReviewRating2);
+        User author1 = new User(expectedNameAuthor1);
+        User author2 = new User(expectedNameAuthor2);
+
+        Review review1 = new Review(author1, expectedReviewText1, expectedReviewRating1);
+        Review review2 = new Review(author2, expectedReviewText2, expectedReviewRating2);
 
         Restaurant mcDonalds = new Restaurant("McDo's", 3);
         System.out.println(mcDonalds);
@@ -118,4 +124,6 @@ class LibraryTest {
         assertEquals(expectedStarRating3, actualStarRating,
                 "Restaurant star ratings change when n additional Review is added.");
     }
+
+    
 }

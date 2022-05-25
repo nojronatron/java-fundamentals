@@ -2,16 +2,18 @@ package inheritance;
 
 public class Review {
     String body;
-    String author;
+    User author;
     int stars;
-    public Review(String authorName, String reviewBody, int starsRating) {
-        this.author = authorName;
+    public Review(User author, String reviewBody, int starsRating) {
+        this.author = author;
         this.body = reviewBody;
         this.stars = starsRating;
     }
 
     @Override
     public String toString() {
-        return "Author " + this.author + "gave " + stars + " stars, and wrote the following review " + this.body + ".";
+        return "Author " + this.author.name +
+                "gave " + stars +
+                " stars, and wrote the following review " + this.body + ".";
     }
 }
